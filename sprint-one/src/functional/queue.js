@@ -13,13 +13,17 @@ var Queue = function() {
 
   someInstance.dequeue = function() {
   //create variable deque = someInstance[0]
-    var deque = someInstance[0];
-  //delete the last and first value of the someInstance
-    delete someInstance[0];
-  //create new method to shift the counter
-    
-    this.shift();
-    return deque;
+    if (counter > 0) {
+      var deque = someInstance[0];
+    //delete the last and first value of the someInstance
+      delete someInstance[0];
+    //create new method to shift the counter
+      someInstance.shift();
+      counter--;
+      return deque;
+    } else {
+      return 0;
+    }
   };
 
   someInstance.shift = function() {
@@ -39,6 +43,7 @@ var Queue = function() {
 };
 
 var testQueue = new Queue();
+testQueue.dequeue();
 testQueue.enqueue('a');
 testQueue.enqueue('b');
 console.log('before we pop an element, our object looks like this: ' + JSON.stringify(testQueue));
