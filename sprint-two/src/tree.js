@@ -22,21 +22,6 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  // var bool = false;
-  // if (this.value === target) {
-  //   bool = true;
-  //   return bool;
-  // } else {
-  //   this.children.forEach(function(childNode) {
-  //     if (childNode.value === target) {
-  //       bool = true;
-  //       return bool;
-  //     } else {
-        
-  //     }
-  //   });
-  // }
-  // return bool;
   if (this.value === target) {
     return true;
   }
