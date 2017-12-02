@@ -28,6 +28,14 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   if (this.nodes[node] !== undefined) {
+    var elementsConnetedTo = this.nodes[node].edges;
+    if (elementsConnetedTo.length) {
+      for (var i = 0; i < elementsConnetedTo.length; i++) {
+        var nodeToAdjust = this.nodes[elementsConnetedTo[i]];
+        var indexOfEdgeToRemove = nodeToAdjust.edges.indexOf(node);
+        nodeToAdjust.edges.splice(indexOfEdgeToRemove, 1);
+      }
+    }
     delete this.nodes[node];
   }
 };
@@ -35,6 +43,9 @@ Graph.prototype.removeNode = function(node) {
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
+  if (this.nodes[fromNode] === undefined || this.nodes[toNode] === undefined) {
+    return false;
+  }
   var fromNodeEdges = this.nodes[fromNode].edges;
   var toNodeEdges = this.nodes[toNode].edges;
   return toNodeEdges.indexOf(this.nodes[fromNode].value) > -1;
